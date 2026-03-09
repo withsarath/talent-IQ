@@ -39,7 +39,7 @@ app.get("/test", (req, res) => {
 //     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
 //   });
 // }
-if (ENV.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production") {
   const frontendPath = path.join(process.cwd(), "frontend", "dist");
 
   app.use(express.static(frontendPath));
