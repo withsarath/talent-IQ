@@ -92,21 +92,16 @@ app.use(clerkMiddleware());
 app.use("/api/inngest", serve({ client: inngest, functions }));
 app.use("/api/chat", chatRoutes);
 app.use("/api/sessions", sessionRoutes);
-
 app.get("/test", (req, res) => {
   res.status(201).json({ message: "testing 1" });
 });
-
 if (process.env.NODE_ENV === "production") {
-  const frontendPath = path.join(__dirname, "../../../frontend/dist");
-
+  const frontendPath = path.join(__dirname, "../../frontend/dist");
   app.use(express.static(frontendPath));
-
   app.get("*", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
   });
 }
-
 const startServer = async () => {
   try {
     await connectDB();
